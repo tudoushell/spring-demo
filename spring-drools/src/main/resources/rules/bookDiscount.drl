@@ -1,0 +1,27 @@
+package com.elliot.spring.demo.drools.rules
+
+import com.elliot.spring.demo.drools.entity.BookDiscount;
+
+rule "book_discount1"
+    when
+        $book:BookDiscount(originalPrice < 100)
+    then
+        System.out.println("book discount1");
+        $book.setDiscountPrice($book.getOriginalPrice());
+end
+
+rule "book_discount2"
+    when
+        $book:BookDiscount(originalPrice >= 100 && originalPrice < 200)
+    then
+            System.out.println("book discount2");
+        $book.setDiscountPrice($book.getOriginalPrice() * 0.8);
+end
+
+rule "book_discount3"
+    when
+     $book:BookDiscount(originalPrice >= 200)
+    then
+         System.out.println("book discount3");
+     $book.setDiscountPrice($book.getOriginalPrice() * 0.5);
+end
