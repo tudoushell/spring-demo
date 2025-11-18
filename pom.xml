@@ -22,6 +22,7 @@
         <collection.version>4.5.0</collection.version>
         <common.io.version>2.20.0</common.io.version>
         <spring.doc.version>2.8.14</spring.doc.version>
+        <drools.version>10.1.0</drools.version>
     </properties>
 
     <dependencyManagement>
@@ -69,19 +70,24 @@
             <dependency>
                 <groupId>org.drools</groupId>
                 <artifactId>drools-compiler</artifactId>
-                <version>10.1.0</version>
+                <version>${drools.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.drools/drools-xml-support -->
             <dependency>
                 <groupId>org.drools</groupId>
                 <artifactId>drools-xml-support</artifactId>
-                <version>10.1.0</version>
+                <version>${drools.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.drools</groupId>
                 <artifactId>drools-core</artifactId>
-                <version>10.1.0</version>
+                <version>${drools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-mvel</artifactId>
+                <version>${drools.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

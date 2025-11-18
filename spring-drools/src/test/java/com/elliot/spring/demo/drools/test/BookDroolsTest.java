@@ -23,7 +23,7 @@ public class BookDroolsTest {
         KieSession kieSession = kieContainer.newKieSession();
 
         BookDiscount bookDiscount = new BookDiscount();
-        bookDiscount.setOriginalPrice(60.0);
+        bookDiscount.setOriginalPrice(120.0);
         kieSession.insert(bookDiscount);
 
         kieSession.fireAllRules();
