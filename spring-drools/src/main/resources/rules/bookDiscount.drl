@@ -1,4 +1,4 @@
-package rules
+package book.rules
 
 import com.elliot.spring.demo.drools.entity.BookDiscount;
 

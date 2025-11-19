@@ -1,0 +1,23 @@
+package city.rules
+import com.elliot.spring.demo.drools.entity.City
+
+rule "contains_test"
+    when
+        $isContain:City(cityNames contains "nj")
+    then
+        System.out.println($isContain.getCityNames());
+end
+
+rule "memberOf_test"
+    when
+       $city:City("beijing" not memberOf cityNames)
+    then
+       System.out.println($city.getCityNames());
+end
+
+rule "matches_test"
+    when
+       $city:City(countryName matches "[chinas]+")
+    then
+       System.out.println($city.getCityNames());
+end
