@@ -1,0 +1,82 @@
+package attribute.rules
+import com.elliot.spring.demo.drools.entity.Staff
+
+rule "test_salience"
+    salience 100
+    dialect "java" //默认为java，可选为mvel
+    enabled false //是否启用该规则
+    when
+    then
+      System.out.println("salience1");
+end
+
+rule "test_salience2"
+    salience 200  //规则执行优先级，值越大，优先级越高
+    enabled false
+    when
+    then
+      System.out.println("salience2");
+end
+
+rule "date-effective"
+    date-effective "2025-11-11 12:12:12" //默认日期格式为：dd-MMM-yyyy，该规则生效时间，可以修改drools.dateformat
+    enabled false
+    when
+    then
+      System.out.println("date-effective");
+end
+
+rule "date-expires"
+    date-expires "2025-12-12 12:12:12"
+    enabled false
+    when
+    then
+    System.out.println("date-expires");
+end
+
+rule "agenda-group1"
+    agenda-group "1"
+    when
+    then
+    System.out.println("agenda-group1");
+end
+
+rule "agenda-group2"
+    salience 1000
+    agenda-group "1"
+    when
+    then
+    System.out.println("agenda-group2");
+end
+
+rule "timer1"
+    enabled false
+    timer(5s 5s)
+    when
+    then
+        System.out.println("-----> timer1");
+end
+
+rule "timer2"
+    timer(cron:0/1 * * * * ?)
+    when
+    then
+        System.out.println("-----> timer2");
+end
+
+rule "auto-fucous"
+    agenda-group "auto-fucous"
+    auto-focus true
+    when
+    then
+        System.out.println("-----> auto-fucous");
+end
+
+rule "no-loop"
+    no-loop    //解决update fact 时，重新匹配规则
+    when
+        $staff:Staff(name == "1")
+    then
+        update($staff)
+        System.out.println("-----> no-loop");
+end

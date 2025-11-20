@@ -1,0 +1,55 @@
+package  operation.rules
+import com.elliot.spring.demo.drools.entity.Staff
+
+rule "level1"
+    when
+        $staff:Staff(level == 1)
+    then
+        $staff.setSalary(1000);
+        update($staff);
+end
+
+rule "name1"
+    when
+       $staff:Staff(salary == 1000)
+    then
+       System.out.println("staff name is " + $staff.getName() + " and salary is " + $staff.getSalary());
+end
+
+
+rule "level2"
+    when
+        $staff:Staff(level == 2 && name == null)
+    then
+        $staff.setName("tom");
+        $staff.setSalary(2000);
+        Staff staff = new Staff();
+        staff.setSalary(3000);
+        staff.setName("tim");
+        staff.setLevel(3);
+        insert(staff);
+end
+
+
+rule "level3"
+    when
+        $staff:Staff(salary == 3000)
+    then
+        System.out.println("staff name is " + $staff.getName() + " and salary is " + $staff.getSalary());
+end
+
+rule "level4"
+    when
+        $staff:Staff(salary == 4000)
+    then
+        $staff.setLevel(5);
+//        update($staff);
+        retract($staff)
+end
+
+rule "level5"
+    when
+        $staff:Staff(level == 5)
+    then
+        System.out.println("staff name is " + $staff.getName() + " and salary is " + $staff.getSalary());
+end
