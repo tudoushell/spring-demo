@@ -1,0 +1,7 @@
+package test.rules
+
+rule "test"
+when
+then
+    System.out.println("111111111111");
+end

@@ -3,16 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.elliot</groupId>
         <artifactId>spring-demo</artifactId>
         <version>1.0</version>
     </parent>
 
-    <groupId>com.elliot.spring</groupId>
-    <artifactId>spring-drools</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>spring-boot-drools</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
@@ -20,7 +17,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -38,10 +40,10 @@
             <artifactId>drools-mvel</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.drools</groupId>
-            <artifactId>drools-xml-support</artifactId>
-            <scope>test</scope>
+            <groupId>org.kie</groupId>
+            <artifactId>kie-api</artifactId>
         </dependency>
     </dependencies>
+
 
 </project>

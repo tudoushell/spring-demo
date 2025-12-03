@@ -8,6 +8,10 @@
     <artifactId>spring-demo</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
+    <modules>
+        <module>spring-boot-drools</module>
+        <module>spring-drools</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +19,7 @@
         <java.version>22</java.version>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
-        <spring.boot.version>3.0.1</spring.boot.version>
+        <spring.boot.version>3.5.8</spring.boot.version>
         <mybatis-plus.version>3.5.4</mybatis-plus.version>
         <lombok.version>1.18.38</lombok.version>
         <lang3.version>3.19.0</lang3.version>
@@ -87,6 +91,16 @@
             <dependency>
                 <groupId>org.drools</groupId>
                 <artifactId>drools-mvel</artifactId>
+                <version>${drools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.drools</groupId>
+                <artifactId>drools-templates</artifactId>
+                <version>${drools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kie</groupId>
+                <artifactId>kie-api</artifactId>
                 <version>${drools.version}</version>
             </dependency>
         </dependencies>
