@@ -1,0 +1,13 @@
+package functions.rules
+
+function int getSalary(int salary) {
+   return salary + 1000;
+}
+
+
+rule "function_1"
+when
+then
+    int salary = getSalary(1000);
+    System.out.println("salary: " + salary );
+end

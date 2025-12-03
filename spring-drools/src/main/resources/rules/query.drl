@@ -1,0 +1,6 @@
+package querys.rules
+import com.elliot.spring.demo.drools.entity.Staff
+
+query "queryTest"(String name)
+    $staff:Staff(name == "mike")
+end

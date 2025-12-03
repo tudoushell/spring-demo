@@ -1,0 +1,52 @@
+package lhs.rules
+import com.elliot.spring.demo.drools.entity.Staff
+
+rule "lhs_in"
+when
+    $staff:Staff(name in ("mike","tom", "tim"))
+then
+    System.out.println("-----> " + $staff.getName() + " name exists");
+end
+
+rule "lhs_eval"
+when  eval(1 == 1)
+then
+    System.out.println("-----> this is eval");
+end
+
+rule "lhs_not"
+when
+    not Staff(name == "tom")
+then
+    System.out.println("-----> name not equals tom");
+end
+
+rule "lhs_exists"
+when
+    exists Staff(salary == 2000)
+then
+    System.out.println("-----> salary equals 2000");
+end
+
+rule "lhs_extend" extends "lhs_in"
+when
+    Staff(name in ("tim"))
+then
+    System.out.println("-----> name exists, extends");
+end
+
+
+rule "rhs_halt"
+when
+then
+    System.out.println("test halt");
+    drools.halt(); //下面的规则不执行
+end
+
+rule "rhs_1"
+when
+then
+   System.out.println("rhs 11111");
+end
+
+

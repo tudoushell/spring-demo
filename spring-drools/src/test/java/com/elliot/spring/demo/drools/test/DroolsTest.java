@@ -4,13 +4,17 @@ import com.elliot.spring.demo.drools.entity.BookDiscount;
 import com.elliot.spring.demo.drools.entity.City;
 import com.elliot.spring.demo.drools.entity.Staff;
 import org.drools.core.base.RuleNameEndsWithAgendaFilter;
+import org.drools.core.base.RuleNameStartsWithAgendaFilter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.kie.api.KieBaseConfiguration;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class DroolsTest {
@@ -26,8 +30,58 @@ public class DroolsTest {
         //必须在创建 KieContainer 之前执行 System.setProperty(),不然时间格式不生效
         System.setProperty("drools.dateformat", "yyyy-MM-dd HH:mm:ss");
         kieServices = KieServices.Factory.get();
-        KieContainer kieContainer = kieServices.newKieClasspathContainer();
+        kieContainer = kieServices.newKieClasspathContainer();
         kieSession = kieContainer.newKieSession();
+    }
+
+
+    @Test
+    public void testRhs() {
+        kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("rhs"));
+        kieSession.dispose();
+    }
+
+
+    @Test
+    public void testLhs() {
+        Staff staff = new Staff();
+        staff.setName("tim");
+        staff.setSalary(2000);
+        kieSession.insert(staff);
+        kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("lhs"));
+        kieSession.dispose();
+    }
+
+
+    @Test
+    public void testFunction() {
+        kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("function"));
+        kieSession.dispose();
+    }
+
+
+    @Test
+    public void testQuery() {
+        Staff staff = new Staff();
+        staff.setName("mike");
+        staff.setLevel(1);
+        staff.setSalary(1000);
+        kieSession.insert(staff);
+        kieSession.fireAllRules();
+        QueryResults queryResults = kieSession.getQueryResults("queryTest", "mike");
+        for (QueryResultsRow queryResult : queryResults) {
+            Staff staff1 = (Staff) queryResult.get("$staff");
+            System.out.println("staff: " + staff1.getName() + " level: " + staff1.getLevel() + " salary:" + staff1.getSalary());
+        }
+        kieSession.dispose();
+    }
+
+    @Test
+    public void testGlobal() {
+        kieSession.setGlobal("count", 10);
+        kieSession.setGlobal("list", Arrays.asList(1, 2, 3));
+        kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("global"));
+        kieSession.dispose();
     }
 
 
